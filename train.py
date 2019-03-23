@@ -70,14 +70,13 @@ def train(train_images, train_labels, test_images, test_labels):
                 _, loss_value, step, y_predict = sess.run([train_op, loss, global_step, y], feed_dict={x: xs, y_o: ys})
                 if i % 10 == 0:
                     print("After %d training steps, loss on training batch is %g" % (step, loss_value))
-                    #print(type(y_predict))
+                    print(y_predict)
                     y_predict = y_predict.argmax(1)
                     count = 0
                     for index in range(BATCH_SIZE):
                         if y_predict[index] == ys[index]:
                             count += 1
                     print("rate is %f%%" % (count / BATCH_SIZE))
-                    print(y_predict)
 
                 if i % 1000 == 0:
                     saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
