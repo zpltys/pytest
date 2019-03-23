@@ -7,7 +7,7 @@ import inference
 import read
 
 BATCH_SIZE = 100
-LEARNING_RATE_BASE = 800.0
+LEARNING_RATE_BASE = 0.1
 LEARNING_RATE_DECAY = 0.99
 REGULARAZTION_RATE = 0.0001
 TRAIN_STEPS = 30000
@@ -68,7 +68,7 @@ def train(train_images, train_labels, test_images, test_labels):
                                      inference.IMAGE_SIZE,
                                      inference.NUM_CHANNELS])
                 _, loss_value, step, y_predict = sess.run([train_op, loss, global_step, y], feed_dict={x: xs, y_o: ys})
-                if i % 10 == 0:
+                if i % 1 == 0:
                     print("After %d training steps, loss on training batch is %g" % (step, loss_value))
                     print(y_predict)
                     y_predict = y_predict.argmax(1)
@@ -78,6 +78,8 @@ def train(train_images, train_labels, test_images, test_labels):
                             count += 1
                     print("rate is %f%%" % (count / BATCH_SIZE))
 
+                if i == 3:
+                    break
                 if i % 1000 == 0:
                     saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
 
