@@ -6,7 +6,7 @@ import numpy as np
 import inference
 import read
 
-BATCH_SIZE = 100
+BATCH_SIZE = 100.0
 LEARNING_RATE_BASE = 800
 LEARNING_RATE_DECAY = 0.99
 REGULARAZTION_RATE = 0.0001
