@@ -6,7 +6,7 @@ import numpy as np
 import inference
 import read
 
-BATCH_SIZE = 100
+BATCH_SIZE = 1
 LEARNING_RATE_BASE = 0.1
 LEARNING_RATE_DECAY = 0.99
 REGULARAZTION_RATE = 0.0001
@@ -56,8 +56,6 @@ def train(train_images, train_labels, test_images, test_labels):
 
         with tf.Session() as sess:
             tf.global_variables_initializer().run()
-
-            totol_samples = train_images.shape[0]
 
             for i in range(TRAIN_STEPS):
                 #start = (i - 1) * BATCH_SIZE % totol_samples
