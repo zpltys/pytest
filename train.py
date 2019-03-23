@@ -77,7 +77,7 @@ def train(train_images, train_labels, test_images, test_labels):
                         if y_predict[index] == ys[index]:
                             count += 1
                     print("rate is %f%%" % (count / BATCH_SIZE))
-                    print(y)
+                    print(y_predict)
 
                 if i % 1000 == 0:
                     saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
