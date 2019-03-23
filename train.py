@@ -7,7 +7,7 @@ import inference
 import read
 
 BATCH_SIZE = 100
-LEARNING_RATE_BASE = 0.8
+LEARNING_RATE_BASE = 800
 LEARNING_RATE_DECAY = 0.99
 REGULARAZTION_RATE = 0.0001
 TRAIN_STEPS = 30000
@@ -32,10 +32,10 @@ def train(train_images, train_labels, test_images, test_labels):
 
         global_step = tf.Variable(0, trainable=False)
 
-        variable_average = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
+       # variable_average = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
 
 
-        variable_average_op = variable_average.apply(tf.trainable_variables())
+        #variable_average_op = variable_average.apply(tf.trainable_variables())
         cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y)
         cross_entropy_mean = tf.reduce_mean(cross_entropy)
 
@@ -48,8 +48,8 @@ def train(train_images, train_labels, test_images, test_labels):
                                                    decay_rate=LEARNING_RATE_DECAY)
         train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)
 
-        with tf.control_dependencies([train_step, variable_average_op]):
-        #with tf.control_dependencies([train_step]):
+        #with tf.control_dependencies([train_step, variable_average_op]):
+        with tf.control_dependencies([train_step]):
             train_op = tf.no_op(name='train')
 
         saver = tf.train.Saver()
