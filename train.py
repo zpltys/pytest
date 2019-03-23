@@ -40,7 +40,7 @@ def train(train_images, train_labels, test_images, test_labels):
         cross_entropy_mean = tf.reduce_mean(cross_entropy)
 
         #loss = cross_entropy_mean + tf.add_n(tf.get_collection('losses'))
-        loss = cross_entropy_mean
+        loss = tf.add_n(tf.get_collection('losses'))
 
         learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE,
                                                    global_step=global_step,
