@@ -60,7 +60,8 @@ def train(train_images, train_labels, test_images, test_labels):
             totol_samples = train_images.shape[0]
 
             for i in range(TRAIN_STEPS):
-                start = (i - 1) * BATCH_SIZE % totol_samples
+                #start = (i - 1) * BATCH_SIZE % totol_samples
+                start = 0
                 end = start + BATCH_SIZE
                 xs, ys = train_images[start:end], train_labels[start:end]
                 xs = np.reshape(xs, [BATCH_SIZE, inference.IMAGE_SIZE,
